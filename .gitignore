@@ -1,0 +1,3 @@
+.venv
+phonesbook/**/__pycache__/
+*.sqlite*

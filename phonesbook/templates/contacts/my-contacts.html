@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block "title" %}Контакти{% endblock %}
+
+{% block "header" %}Контакти{% endblock %}
+
+{% block "body" %}
+<!-- ul -> unordered list; li -> list item -->
+<ul class="nav nav-pills nav-justified mt-3">
+  <li class="nav-item">
+    <a class="nav-link text-warning active" href="#">Мої контакти</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'add_contact' %}">Додати контакт</a>
+  </li>
+</ul>
+
+<table class="table table-hover text-white mt-5">
+  <!-- thead -> table head; tr -> table row; td -> table data -->
+  <thead>
+    <tr>
+      <th>ФІО</th>
+      <th>Телефон</th>
+      <th>Адреса</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>John Smith</td>
+      <td>22332288</td>
+      <td>vesniana street</td>
+      <td>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal">
+	  Видалити
+	</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Anton Bobrov</td>
+      <td>22332288</td>
+      <td>bobrov street</td>
+      <td>
+	<button class="btn btn-danger">Видалити</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modals -->
+<div class="modal text-black" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Дійсно видалити контакт?</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      
+      <div class="modal-body">
+        <div><b>Full name:</b> John Smith</div>
+        <div><b>Phone number:</b> 22332288</div>
+        <div><b>Address:</b> vesniana street</div>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

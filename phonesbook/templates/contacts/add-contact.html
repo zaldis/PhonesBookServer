@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block "title" %}Додати контакт{% endblock %}
+
+{% block "header" %}Додати контакт{% endblock %}
+
+{% block "body" %}
+  <ul class="nav nav-pills nav-justified mt-3">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'contacts' %}">Мої контакти</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-warning active" href="#">Додати контакт</a>
+    </li>
+  </ul>
+
+  <form method="post">
+    <div class="mb-3 mt-3">
+      <label for="full_name" class="form-label">ФІО:</label>
+      <input class="form-control" placeholder="Введіть ФІО" name="full_name" required>
+    </div>
+ 
+    <div class="mb-3 mt-3">
+      <label for="phone_number" class="form-label">Телефон:</label>
+      <input class="form-control" type="tel" placeholder="Введіть номер телефону" name="phone_number" required>
+    </div>
+
+    <div class="mb-3 mt-3">
+      <label for="address" class="form-label">Адреса:</label>
+      <input class="form-control" placeholder="Введіть адресу" name="address" required>
+    </div>
+
+    <input type="submit" value="Додати контакт" class="btn btn-light mt-3">
+</form>
+{% endblock %}
+
