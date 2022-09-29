@@ -12,6 +12,11 @@
     <li class="nav-item">
       <a class="nav-link text-warning active" href="#">Додати контакт</a>
     </li>
+    {% if user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url 'admin:index' %}">Admin</a>
+      </li>
+    {% endif %}
   </ul>
 
   <form method="post">
