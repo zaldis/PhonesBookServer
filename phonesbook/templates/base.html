@@ -15,6 +15,12 @@
     {% block "body" %}{% endblock %}
   </div>
 
-  <footer style="text-align: center; cursor: pointer;">Вийти</footer>
+  <footer style="text-align: center; cursor: pointer;">
+    {% if user.is_authenticated %}
+      <a class="btn btn-link" style="color: white;" href="{% url 'logout' %}">Вийти</a>
+    {% else %}
+      <a class="btn btn-link" style="color: white;" href="{% url 'login' %}">Логін</a>
+    {% endif %}
+  </footer>
 </body>
 </html>
