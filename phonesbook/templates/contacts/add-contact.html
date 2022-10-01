@@ -20,6 +20,7 @@
   </ul>
 
   <form method="post">
+    {% csrf_token %}
     <div class="mb-3 mt-3">
       <label for="full_name" class="form-label">ФІО:</label>
       <input class="form-control" placeholder="Введіть ФІО" name="full_name" required>
