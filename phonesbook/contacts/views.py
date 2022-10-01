@@ -1,7 +1,8 @@
+from django import views
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, get_object_or_404
 
 from . import forms, models
 
@@ -35,4 +36,11 @@ class CreateContactView(LoginRequiredMixin, TemplateView):
             )
             return redirect(reverse('contacts'))
         return redirect(request.get_full_path())
+
+
+class DeleteContactView(LoginRequiredMixin, views.View):
+    def post(self, request: HttpRequest, pk: int) -> HttpResponse:
+        contact = get_object_or_404(models.Contact, pk=pk)
+        contact.delete()
+        return redirect(reverse('contacts'))
 
