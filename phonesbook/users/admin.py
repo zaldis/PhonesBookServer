@@ -13,4 +13,6 @@ class ContactInline(admin.TabularInline):
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
     inlines = [ContactInline, ]
+    list_display = ("username", "email", "first_name", "last_name", "is_staff", "contacts_count")
+
 
