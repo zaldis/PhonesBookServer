@@ -17,7 +17,15 @@ class GetContactsView(LoginRequiredMixin, TemplateView):
             models.Contact.objects.filter(owner=request.user)
                 .defer('owner', 'created_at')
         )
+
+        query = request.GET.get('q')
+        if query:
+            contacts = contacts.filter(
+                full_name__icontains=query
+            )
+
         context['contacts'] = contacts
+        context['query'] = query
         return context 
 
 
