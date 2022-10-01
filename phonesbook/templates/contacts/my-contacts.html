@@ -20,6 +20,15 @@
   {% endif %}
 </ul>
 
+<form method="get" class="row mt-3">
+  <div class="col-11">
+    <input name="q" type="text" placeholder="Search" value="{{ query }}" class="form-control">
+  </div>
+  <div class="col-1">
+    <button type="submit" class="btn" style="color: black; background-color: white;">Search</button>
+  </div>
+</form>
+
 <table class="table table-hover text-white mt-5">
   <!-- thead -> table head; tr -> table row; td -> table data -->
   <thead>
