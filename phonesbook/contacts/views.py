@@ -18,7 +18,7 @@ class GetContactsView(LoginRequiredMixin, TemplateView):
                 .defer('owner', 'created_at')
         )
 
-        query = request.GET.get('q')
+        query = request.GET.get('q', '')
         if query:
             contacts = contacts.filter(
                 full_name__icontains=query
