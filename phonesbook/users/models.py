@@ -1,8 +1,8 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, UserManager as DjangoUserManager
 from django.db.models import Count
 
 
-class UserManager(BaseUserManager):
+class UserManager(DjangoUserManager):
     def get_queryset(self):
         qs = super().get_queryset()
         qs = qs.annotate(_contacts_count = Count('contacts'))
@@ -14,6 +14,5 @@ class User(AbstractUser):
 
     @property
     def contacts_count(self) -> int:
-        # return self.contacts.count()
         return self._contacts_count
 

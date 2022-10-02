@@ -9,7 +9,7 @@ from .forms import RegistrationForm
 UserModel = get_user_model()
 
 
-class CreateNewUserView(View):
+class CreateUserView(View):
     
     def get(self, request, *args, **kwargs) -> HttpResponse:
         return render(request, 'users/new_user.html', {})
