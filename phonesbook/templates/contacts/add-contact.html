@@ -7,7 +7,7 @@
 {% block "body" %}
   <ul class="nav nav-pills nav-justified mt-3">
     <li class="nav-item">
-      <a class="nav-link text-white" href="{% url 'contacts' %}">Мої контакти</a>
+      <a class="nav-link text-white" href="{% url 'contacts:all' %}">Мої контакти</a>
     </li>
     <li class="nav-item">
       <a class="nav-link text-warning active" href="#">Додати контакт</a>
@@ -37,6 +37,17 @@
     </div>
 
     <input type="submit" value="Додати контакт" class="btn btn-light mt-3">
-</form>
+  </form>
+
+  <hr />
+
+  <form method="post" action="{% url 'contacts:add_from_file' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3 mt-5">
+      <label for="contacts" class="form-label">File with contacts:</label>
+      <input name="contacts" class="form-control" type="file" required>
+    </div>
+    <input type="submit" value="Add contacts from file" class="btn btn-light mt-3">
+  </form>
 {% endblock %}
 
