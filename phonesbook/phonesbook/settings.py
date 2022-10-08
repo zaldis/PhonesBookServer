@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'contacts.apps.ContactsConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
