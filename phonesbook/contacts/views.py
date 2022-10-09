@@ -33,14 +33,12 @@ class GetContactsView(LoginRequiredMixin, TemplateView):
         return context 
 
 
+@method_decorator(
+    user_passes_test(lambda user: user.has_perm('contacts.add_contact')),
+    name='get'
+)
 class CreateContactView(LoginRequiredMixin, TemplateView):
     template_name = 'contacts/add-contact.html'
-
-    @method_decorator(
-        user_passes_test(lambda user: user.has_perm('contacts.add_contact'))
-    )
-    def get(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
-        return super().get(request, *args, **kwargs)
 
     @method_decorator(
         user_passes_test(lambda user: user.has_perm('contacts.add_contact'))
@@ -65,12 +63,14 @@ class CreateContactsView(LoginRequiredMixin, views.View):
         text_contacts = contacts_file.read().decode()
         raw_contacts = json.loads(text_contacts)
 
-        for raw_contact in raw_contacts:
-            models.Contact.objects.create(
+        contacts = [
+            models.Contact(
                 **raw_contact,
                 owner=request.user
             )
-
+            for raw_contact in raw_contacts
+        ]
+        models.Contact.objects.bulk_create(contacts)
         return redirect(reverse('contacts:all'))
 
 
