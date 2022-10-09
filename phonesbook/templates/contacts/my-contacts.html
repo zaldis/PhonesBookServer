@@ -9,9 +9,11 @@
   <li class="nav-item">
     <a class="nav-link text-warning active" href="#">Мої контакти</a>
   </li>
+  {% if perms.contacts.add_contact %}
   <li class="nav-item">
-    <a class="nav-link text-white" href="{% url 'add_contact' %}">Додати контакт</a>
+    <a class="nav-link text-white" href="{% url 'contacts:add' %}">Додати контакт</a>
   </li>
+  {% endif %}
   {% if user.is_staff %}
     <li class="nav-item">
       <a class="nav-link text-white" href="{% url 'admin:index' %}">Admin</a>
@@ -48,6 +50,7 @@
       <td>{{ contact.phone_number }}</td>
       <td>{{ contact.address }}</td>
       <td>
+	{% if perms.contacts.delete_contact %}
 	<button class="btn btn-danger"
 		data-bs-toggle="modal"
 		data-bs-target="#deleteContact{{ contact.id }}">
@@ -70,7 +73,7 @@
 	      </div>
       
 	      <div class="modal-footer">
-		<form method="post" action="{% url 'delete_contact' contact.id %}">
+		<form method="post" action="{% url 'contacts:delete' contact.id %}">
 		  {% csrf_token %}
 		  <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Видалити</button>
 		</form>
@@ -79,6 +82,7 @@
 	  </div>
 	</div>
 	<!-- End modal -->
+	{% endif %}
       </td>
     </tr>
     {% empty %}
@@ -92,4 +96,8 @@
     {% endfor %}
   </tbody>
 </table>
+
+<form method="get" action="{% url 'contacts:download' %}">
+  <input type="submit" class="btn btn-light" value="Download contacts">
+</form>
 {% endblock %}

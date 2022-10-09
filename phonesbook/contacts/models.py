@@ -22,7 +22,7 @@ class Contact(models.Model):
         verbose_name = 'Contact'
         verbose_name_plural = 'Contacts'
         ordering = ['-created_at']
- 
+
     def __str__(self) -> str:
         return (
             f'Contact of User ID={self.owner_id} for [{self.full_name}] '
