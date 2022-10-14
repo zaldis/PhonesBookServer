@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
-from django.shortcuts import reverse
+
+from dotenv import dotenv_values
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,19 +23,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9tr@s@m-g+^i@&k0jab^5u*2=h!pz^^8v+qu-4yf+-bgn68fs#'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+dotenv_config = dotenv_values(BASE_DIR / '.env')
+config = {
+    **dotenv_config,
+    **os.environ,
+}
+
+
+ALLOWED_HOSTS = ['localhost']
+if host := config.get('HOST'):
+    ALLOWED_HOSTS.append(host)
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = (config.get('DEBUG', 'False') == 'True')
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = config['SECRET_KEY']
 
 
 # Application definition
