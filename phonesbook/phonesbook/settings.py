@@ -57,7 +57,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -65,6 +64,11 @@ INSTALLED_APPS = [
     'contacts.apps.ContactsConfig',
     'api.apps.ApiConfig',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
