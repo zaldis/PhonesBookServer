@@ -27,7 +27,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 
-
 dotenv_config = dotenv_values(BASE_DIR / '.env')
 config = {
     **dotenv_config,
