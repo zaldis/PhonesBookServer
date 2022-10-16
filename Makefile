@@ -1,4 +1,4 @@
-run:
+run: migrate
 	python phonesbook/manage.py runserver
 
 migrate:

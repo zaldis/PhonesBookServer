@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
+from django.shortcuts import reverse, redirect
 
 from django.contrib.auth import views
+
+
+def home_view(request):
+    return redirect(reverse('contacts:all'))
 
 
 urlpatterns = [
@@ -29,6 +34,7 @@ urlpatterns = [
     path('login/', views.LoginView.as_view(), name='login'),
 
     path('api/', include('api.urls', namespace='api')),
+    path('', home_view, name='index'),
 ]
 
 if settings.DEBUG:
