@@ -8,7 +8,7 @@ makemigrations:
 	python phonesbook/manage.py makemigrations
 
 static:
-	python phonesbook/manage.py loadstatic
+	python phonesbook/manage.py collectstatic
 
 data: users contacts
 
